@@ -1123,23 +1123,23 @@ class TrueNASCoordinator(DataUpdateCoordinator[None]):
         if not self._is_scale:
             return
 
-        self.ds["app"] = parse_api(
-            data=self.ds["app"],
-            source=self.api.query("chart/release"),
-            key="id",
-            vals=[
-                {"name": "id", "default": 0},
-                {"name": "name", "default": "unknown"},
-                {"name": "human_version", "default": "unknown"},
-                {"name": "update_available", "default": "unknown"},
-                {"name": "container_images_update_available", "default": "unknown"},
-                {"name": "portal", "source": "portals/open", "default": "unknown"},
-                {"name": "status", "default": "unknown"},
-            ],
-            ensure_vals=[
-                {"name": "running", "type": "bool", "default": False},
-            ],
-        )
+        # self.ds["app"] = parse_api(
+        #     data=self.ds["app"],
+        #     source=self.api.query("chart/release"),
+        #     key="id",
+        #     vals=[
+        #         {"name": "id", "default": 0},
+        #         {"name": "name", "default": "unknown"},
+        #         {"name": "human_version", "default": "unknown"},
+        #         {"name": "update_available", "default": "unknown"},
+        #         {"name": "container_images_update_available", "default": "unknown"},
+        #         {"name": "portal", "source": "portals/open", "default": "unknown"},
+        #         {"name": "status", "default": "unknown"},
+        #     ],
+        #     ensure_vals=[
+        #         {"name": "running", "type": "bool", "default": False},
+        #     ],
+        # )
 
         for uid, vals in self.ds["app"].items():
             self.ds["app"][uid]["running"] = vals["status"] == "ACTIVE"
